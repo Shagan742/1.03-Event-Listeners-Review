@@ -7,17 +7,32 @@ function render (html) {
    Demo 1: Click (counter)
 -------------------------------- */
 let clickCount = 0
-
+document.getElementById("btnClick").addEventListener('click', () => {
+   clickCount++;
+   render(`<p>Number of Clicks: ${clickCount}</p>`);
+})
 
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
+const dblClickCard=document.getElementById("dblCard")
 
+dblClickCard.addEventListener('dblclick', ()=> {
+   dblClickCard.classList.toggle("activated")
+   const state=dblClickCard.classList.contains("activated") ? 'ON' : 'OFF';
+render(`<p>Double Click is: ${state}</p>`)
+})
 
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
+const kbCode=document.getElementById("kbCode")
+const kbKey=document.getElementById("kbKey")
 
+document.addEventListener('keydown', e => {
+   kbKey.textContent=e.key ===' ' ? ('space') : e.key;
+   kbCode.textContent=e.code;
+})
 
 /* ----------------------------------------
    Demo 4: Show Time (12-hour format + day)
@@ -29,6 +44,8 @@ let clickCount = 0
 -------------------------- */
 document.getElementById('btnClear').addEventListener('click', () => {
   render('<span class="text-secondary">Output cleared.</span>')
+  clickCount=0;
+  hoverTimes=0;
 })
 
 /* =================================================
@@ -55,3 +72,20 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
+
+// A
+
+let hoverTimes=0;
+const hvrCard=document.getElementById("hvrCard")
+hvrCard.addEventListener('mouseenter', ()=> {
+   hvrCard.classList.add('highlight');
+   hoverTimes++;
+   render(`Hover #${hoverTimes}`);
+})
+
+hvrCard.addEventListener('mouseleave', ()=> {
+   hvrCard.classList.remove('highlight')
+   render(`Your mouse is off the card`);
+})
+
+
